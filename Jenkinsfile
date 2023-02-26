@@ -5,6 +5,7 @@ pipeline {
       agent any
       steps {
         sh 'pwd'
+        sh 'ls'
       }
     }
 
