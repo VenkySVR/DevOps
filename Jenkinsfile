@@ -7,7 +7,13 @@ pipeline {
         sh 'echo "Git command"'
       }
     }
-    stage('Docker') {
+    stage('Docker build') {
+      agent any
+      steps {
+        sh 'echo "Docker command"'
+      }
+    }
+    stage('Docker push') {
       agent any
       steps {
         sh 'echo "Docker command"'
