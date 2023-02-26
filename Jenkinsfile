@@ -4,7 +4,7 @@ pipeline {
     stage('Git') {
       agent any
       steps {
-        git 'https://github.com/VenkySVR/DevOps'
+        git 'https://github.com/VenkySVR/DevOps.git'
       }
     }
 
