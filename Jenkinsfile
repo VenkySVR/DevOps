@@ -11,8 +11,9 @@ pipeline {
 
     stage('Docker build') {
       agent any
-      steps {
-        sh 'echo "Docker command"'
+      sshagent(['ansible']) {
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.108'
+        sh 'scp /var/lib/jenkins/workspace/DevOps\_main\@2/* ubuntu@192.168.55.108:/home/ubuntu'
       }
     }
 
