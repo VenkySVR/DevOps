@@ -11,11 +11,13 @@ pipeline {
 
     stage('Docker build') {
       agent any
-      sshagent(['ansible']) {
+      steps {
+        sshagent(['ansible']) {
         sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.106'
         sh 'scp /var/lib/jenkins/workspace/DevOps_main@2/* ubuntu@192.168.55.106:/home/ubuntu'
         sh 'ls'
       }
+
     }
 
     stage('Docker push') {
