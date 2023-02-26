@@ -24,12 +24,10 @@ pipeline {
       agent any
       steps {
         sshagent(['ansible']) {
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 cd /home/ubuntu/app'
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker build . -t venkysvr/app'
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker build app/. -t venkysvr/app'
         sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/app'
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 cd /home/ubuntu/web'
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker build . -t venkysvr/web'
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 cd /home/ubuntu/web && docker push venkysvr/web'
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker build web/. -t venkysvr/web'
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/web'
       }
       }
     }
