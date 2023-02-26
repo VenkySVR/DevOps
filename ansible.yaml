@@ -1,0 +1,9 @@
+hosts: minikube
+become: True
+tasks:
+  - name: deploy app
+    cmd: kubectl apply -f kubernetes/app.yaml
+  - name: deploy nginx
+    cmd: kubectl apply -f kubernetes/nginx.yaml
+  - name: deploy web
+    cmd: kubectl apply -f kubernetes/web.yaml
