@@ -4,7 +4,7 @@ pipeline {
     stage('Git') {
       agent any
       steps {
-        sh 'ls'
+        sh 'pwd'
       }
     }
 
