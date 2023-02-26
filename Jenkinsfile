@@ -34,7 +34,7 @@ pipeline {
       steps {
         sshagent(['ansible']) {
           withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
-            sh 'docker login -u ${docker_username} -p ${docker_password}'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker login -u ${docker_username} -p ${docker_password}'
             sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/app'
         sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/web'
       
