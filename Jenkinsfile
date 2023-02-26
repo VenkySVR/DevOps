@@ -13,6 +13,12 @@ pipeline {
         sh 'echo "Docker command"'
       }
     }
+    stage('Kubernetes') {
+      agent any
+      steps {
+        sh 'echo "Kubernetes command"'
+      }
+    }
 
   }
 }
