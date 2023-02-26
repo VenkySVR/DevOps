@@ -17,6 +17,7 @@ pipeline {
         sh 'scp /var/lib/jenkins/workspace/DevOps_main@2/* ubuntu@192.168.55.106:/home/ubuntu'
         sh 'ls'
       }
+      }
 
     }
 
