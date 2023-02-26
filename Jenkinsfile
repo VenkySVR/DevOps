@@ -20,15 +20,26 @@ pipeline {
 
     }
 
-    stage('Docker') {
+    stage('Docker Build') {
       agent any
       steps {
         sshagent(['ansible']) {
         sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker build app/. -t venkysvr/app'
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/app'
         sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker build web/. -t venkysvr/web'
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/web'
       }
+      }
+    }
+     stage('Docker push') {
+      agent any
+      steps {
+        sshagent(['ansible']) {
+          withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
+            sh 'docker login -u ${docker_username} -p ${docker_password}'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/app'
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 docker push venkysvr/web'
+      
+        }
+        }
       }
     }
 
