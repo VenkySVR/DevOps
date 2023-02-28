@@ -47,7 +47,9 @@ pipeline {
       agent any
       steps {
         sshagent(['ansible']) {
-        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.105 ls'
+        sh 'ssh -o StrictHostKeyChecking=no ubuntu@192.168.55.107'
+        sh 'scp -r /var/lib/jenkins/workspace/DevOps_main/kubernetes/* ubuntu@192.168.55.107:/home/ubuntu'
+      
       }
       }
     }
